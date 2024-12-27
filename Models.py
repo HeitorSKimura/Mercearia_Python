@@ -3,11 +3,11 @@ class Category:
         self.name = name
 
 class Product:
-    def __init__(self, name, code, price, category: Category):
+    def __init__(self, name, code, price, idCategory):
         self.name = name
         self.code = code
         self.price = price
-        self.category = category
+        self.idCategory = idCategory
 
 class People:
     def __init__(self, name, cpf_cnpj, phoneNumber, address, email):
@@ -18,14 +18,14 @@ class People:
         self.email = email
 
 class Supplier(People):
-    def __init__(self, name, cpf_cnpj, phoneNumber, address, email, *products:Product):
+    def __init__(self, name, cpf_cnpj, phoneNumber, address, email, product_id):
         super().__init__(name, cpf_cnpj, phoneNumber, address, email)
-        self.product = products
+        self.product_id = product_id
 
 class Customer(People):
-    def __init__(self, name, cpf_cnpj, phoneNumber, address, email, lastBuy):
+    def __init__(self, name, cpf_cnpj, phoneNumber, address, email, delivery_address=None):
         super().__init__(name, cpf_cnpj, phoneNumber, address, email)
-        self.lastBuy = lastBuy
+        self.delivery_address = delivery_address
 
 class Employee(People):
     def __init__(self, name, cpf_cnpj, phoneNumber, address, email, salary):
@@ -33,11 +33,14 @@ class Employee(People):
         self.salary = salary
 
 class Stock:
-    def __init__(self, product: Product, quantity):
-        self.product = product
+    def __init__(self, product_id, quantity):
+        self.product_id = product_id
         self.quantity = quantity
 
 class Sale:
-    def __init__(self, customer: Customer, *products: Product):
-        self.customer = customer
-        self.products = products
+    def __init__(self, customer_id, employee_id, product_id, dataCompra, quantity):
+        self.customer_id = customer_id
+        self.employee_id = employee_id
+        self.product_id = product_id
+        self.dataCompra = dataCompra
+        self.quantity = quantity
